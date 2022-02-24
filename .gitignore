@@ -3,3 +3,4 @@
 *.sqlite
 *.tar.gz
 *.sw*
+*/__pycache__/
