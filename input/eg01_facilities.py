@@ -139,3 +139,78 @@ sink = {'name' : 'Waste',
                    }
        }
 
+# Extra facilities for ramp-up : mixer scheme for 10, 50 pct additive UOX streams
+
+# first need extra storage to request separate stream/recipe
+store_pct_no232 = {'name' : 'StorageRampNoAdditive', 
+                   'config' : {'Storage' : {'in_commods' : {'val' : 'UOX_NoAdditive'}, 
+                                            'in_recipe' : 'UOX_no232', 
+                                            'out_commods' : {'val' : 'Mixer_UOX_NoAdditive'}, 
+                                            'residence_time' : 0,
+                                            'throughput' : 1e10,
+                                            'max_inv_size' : 1e20
+                                           }
+                              }
+                   }
+store_pct_232 = {'name' : 'StorageRampAdditive', 
+                 'config' : {'Storage' : {'in_commods' : {'val' : 'UOX_Additive'}, 
+                                          'in_recipe' : 'UOX_232', 
+                                          'out_commods' : {'val' : 'Mixer_UOX_Additive'}, 
+                                          'residence_time' : 0,
+                                          'throughput' : 1e10,
+                                          'max_inv_size' : 1e20
+                                         }
+                            }
+                }
+
+# 50 pct additive material stream
+mix_non_stream50 = {'info' : {'mixing_ratio' : 0.5, 
+                              'buf_size' : 1e8
+                             },
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_NoAdditive', 
+                                               'pref' : 1.0
+                                              }
+                                    }
+                   }
+mix_add_stream50 = {'info' : {'mixing_ratio' : 0.5,
+                              'buf_size' : 1e8
+                             },
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Additive',
+                                               'pref' : 1.0
+                                              }
+                                    }
+                   }
+mix_50pct232 = {'name' : 'Mixer50pctAdditive',
+                'config' : {'Mixer' : {'in_streams' : {'stream' : [mix_non_stream50, mix_add_stream50]},
+                                       'out_commod' : 'UOX_50pctAdditive',
+                                       'throughput' : 1e10,
+                                       'out_buf_size' : 1e20
+                                      }
+                           }
+               }
+
+# 10 pct additive material stream
+mix_non_stream10 = {'info' : {'mixing_ratio' : 0.9, 
+                              'buf_size' : 1e8
+                             },
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_NoAdditive', 
+                                               'pref' : 1.0
+                                              }
+                                    }
+                   }
+mix_add_stream10 = {'info' : {'mixing_ratio' : 0.1,
+                              'buf_size' : 1e8
+                             },
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Additive',
+                                               'pref' : 1.0
+                                              }
+                                    }
+                   }
+mix_10pct232 = {'name' : 'Mixer10pctAdditive',
+                'config' : {'Mixer' : {'in_streams' : {'stream' : [mix_non_stream10, mix_add_stream10]},
+                                       'out_commod' : 'UOX_10pctAdditive',
+                                       'throughput' : 1e10,
+                                       'out_buf_size' : 1e20
+                                      }
+                           }
+               }
