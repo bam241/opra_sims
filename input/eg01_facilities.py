@@ -6,15 +6,15 @@ natu_source = {'name' : 'SourceNatU',
                                       }
                           }
               }
-non_source = {'name' : 'SourceNoAdditiveIsos',
-              'config' : {'Source' : {'outcommod' : 'NoAdditiveIsos',
+non_source = {'name' : 'SourceNonIsos',
+              'config' : {'Source' : {'outcommod' : 'NoAddIsos',
                                       'outrecipe' : 'NoAdditive_234',
                                       'throughput' : 1e6
                                      }
                          }
              }
-add_source = {'name' : 'SourceAdditiveIsos',
-              'config' : {'Source' : {'outcommod' : 'AdditiveIsos',
+add_source = {'name' : 'SourceAddIsos',
+              'config' : {'Source' : {'outcommod' : 'AddIsos',
                                       'outrecipe' : 'Additive_232_233_234',
                                       'throughput' : 1e6
                                      }
@@ -39,10 +39,10 @@ enrich = {'name' : 'Enrichment',
 # recipes. (Storage is needed to request specific recipes)
 
 # Non Additive Fuel Material Stream
-store_no232 = {'name' : 'StorageNoAdditive', 
+store_no232 = {'name' : 'UOXStrNon', 
                'config' : {'Storage' : {'in_commods' : {'val' : 'AlmostUOX'}, 
                                         'in_recipe' : 'AlmostUOX_no232', 
-                                        'out_commods' : {'val' : 'AlmostUOX_NoAdditive'}, 
+                                        'out_commods' : {'val' : 'AlmostUOX_Non'}, 
                                         'residence_time' : 0,
                                         'throughput' : 1e8,
                                         'max_inv_size' : 1e10
@@ -53,7 +53,7 @@ store_no232 = {'name' : 'StorageNoAdditive',
 mix_no_stream1 = {'info' : {'mixing_ratio' : 0.0004631049477, 
                             'buf_size' : 1e6
                            },
-                  'commodities' : {'item' : {'commodity' : 'NoAdditiveIsos', 
+                  'commodities' : {'item' : {'commodity' : 'NonIsos', 
                                              'pref' : 1.0
                                             }
                                   }
@@ -61,14 +61,14 @@ mix_no_stream1 = {'info' : {'mixing_ratio' : 0.0004631049477,
 mix_no_stream2 = {'info' : {'mixing_ratio' : 0.9995368950523,
                             'buf_size' : 1e8
                            },
-                  'commodities' : {'item' : {'commodity' : 'AlmostUOX_NoAdditive',
+                  'commodities' : {'item' : {'commodity' : 'AlmostUOX_Non',
                                              'pref' : 1.0
                                             }
                                   }
                  }
-mix_no232 = {'name' : 'MixerNoAdditive',
+mix_no232 = {'name' : 'UOXMixNon',
              'config' : {'Mixer' : {'in_streams' : {'stream' : [mix_no_stream1, mix_no_stream2]},
-                                    'out_commod' : 'UOX_NoAdditive',
+                                    'out_commod' : 'UOX_Non',
                                     'throughput' : 1e10,
                                     'out_buf_size' : 1e20
                                    }
@@ -76,10 +76,10 @@ mix_no232 = {'name' : 'MixerNoAdditive',
             }
 
 # Additive Fuel Material Stream
-store_232 = {'name' : 'StorageAdditive', 
+store_232 = {'name' : 'UOXStrAdd', 
              'config' : {'Storage' : {'in_commods' : {'val' : 'AlmostUOX'}, 
                                       'in_recipe' : 'AlmostUOX_232', 
-                                      'out_commods' : {'val' : 'AlmostUOX_Additive'}, 
+                                      'out_commods' : {'val' : 'AlmostUOX_Add'}, 
                                       'residence_time' : 0,
                                       'throughput' : 1e8,
                                       'max_inv_size' : 1e10
@@ -89,7 +89,7 @@ store_232 = {'name' : 'StorageAdditive',
 mix_add_stream1 = {'info' : {'mixing_ratio' : 0.0004631072127, 
                              'buf_size' : 1e6
                             },
-                   'commodities' : {'item' : {'commodity' : 'AdditiveIsos', 
+                   'commodities' : {'item' : {'commodity' : 'AddIsos', 
                                               'pref' : 1.0
                                              }
                                    }
@@ -97,14 +97,14 @@ mix_add_stream1 = {'info' : {'mixing_ratio' : 0.0004631072127,
 mix_add_stream2 = {'info' : {'mixing_ratio' : 0.9995368927873,
                              'buf_size' : 1e8
                             },
-                   'commodities' : {'item' : {'commodity' : 'AlmostUOX_Additive',
+                   'commodities' : {'item' : {'commodity' : 'AlmostUOX_Add',
                                               'pref' : 1.0
                                              }
                                    }
                   }
-mix_232 = {'name' : 'MixerAdditive',
+mix_232 = {'name' : 'UOXMixAdd',
            'config' : {'Mixer' : {'in_streams' : {'stream' : [mix_add_stream1, mix_add_stream2]},
-                                  'out_commod' : 'UOX_Additive',
+                                  'out_commod' : 'UOX_Add',
                                   'throughput' : 1e10,
                                   'out_buf_size' : 1e20
                                  }
@@ -119,14 +119,14 @@ du_store = {'name' : 'StorageDepU',
                                     }
                        }
            }
-lwr_cool = {'name' : 'CoolingLWR', 
-            'config' : {'Storage' : {'in_commods' : {'val' : ['SpentUOX_Additive', 'SpentUOX_NoAdditive']}, 
+lwr_cool = {'name' : 'UOXCool', 
+            'config' : {'Storage' : {'in_commods' : {'val' : ['SpentUOX_Add', 'SpentUOX_Non']}, 
                                      'out_commods' : {'val' : 'CooledSpentUOX'}, 
                                      'residence_time' : 81
                                     }
                        }
            }
-lwr_store = {'name' : 'StorageLWR', 
+lwr_store = {'name' : 'UOXStr', 
              'config' : {'Storage' : {'in_commods' : {'val' : 'CooledSpentUOX'}, 
                                       'out_commods' : {'val' : 'StoredSpentUOX'}, 
                                       'residence_time' : 0
@@ -142,20 +142,20 @@ sink = {'name' : 'Waste',
 # Extra facilities for ramp-up : mixer scheme for 10, 50 pct additive UOX streams
 
 # first need extra storage to request separate stream/recipe
-store_pct_no232 = {'name' : 'StorageRampNoAdditive', 
-                   'config' : {'Storage' : {'in_commods' : {'val' : 'UOX_NoAdditive'}, 
+store_pct_no232 = {'name' : 'StorageRampNon', 
+                   'config' : {'Storage' : {'in_commods' : {'val' : 'UOX_Non'}, 
                                             'in_recipe' : 'UOX_no232', 
-                                            'out_commods' : {'val' : 'Mixer_UOX_NoAdditive'}, 
+                                            'out_commods' : {'val' : 'Mixer_UOX_Non'}, 
                                             'residence_time' : 0,
                                             'throughput' : 1e10,
                                             'max_inv_size' : 1e20
                                            }
                               }
                    }
-store_pct_232 = {'name' : 'StorageRampAdditive', 
-                 'config' : {'Storage' : {'in_commods' : {'val' : 'UOX_Additive'}, 
+store_pct_232 = {'name' : 'StorageRampAdd', 
+                 'config' : {'Storage' : {'in_commods' : {'val' : 'UOX_Add'}, 
                                           'in_recipe' : 'UOX_232', 
-                                          'out_commods' : {'val' : 'Mixer_UOX_Additive'}, 
+                                          'out_commods' : {'val' : 'Mixer_UOX_Add'}, 
                                           'residence_time' : 0,
                                           'throughput' : 1e10,
                                           'max_inv_size' : 1e20
@@ -167,7 +167,7 @@ store_pct_232 = {'name' : 'StorageRampAdditive',
 mix_non_stream50 = {'info' : {'mixing_ratio' : 0.5, 
                               'buf_size' : 1e8
                              },
-                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_NoAdditive', 
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Non', 
                                                'pref' : 1.0
                                               }
                                     }
@@ -175,14 +175,14 @@ mix_non_stream50 = {'info' : {'mixing_ratio' : 0.5,
 mix_add_stream50 = {'info' : {'mixing_ratio' : 0.5,
                               'buf_size' : 1e8
                              },
-                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Additive',
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Add',
                                                'pref' : 1.0
                                               }
                                     }
                    }
-mix_50pct232 = {'name' : 'Mixer50pctAdditive',
+mix_50pct232 = {'name' : 'Mixer50pctAdd',
                 'config' : {'Mixer' : {'in_streams' : {'stream' : [mix_non_stream50, mix_add_stream50]},
-                                       'out_commod' : 'UOX_50pctAdditive',
+                                       'out_commod' : 'UOX_50pctAdd',
                                        'throughput' : 1e10,
                                        'out_buf_size' : 1e20
                                       }
@@ -193,7 +193,7 @@ mix_50pct232 = {'name' : 'Mixer50pctAdditive',
 mix_non_stream10 = {'info' : {'mixing_ratio' : 0.9, 
                               'buf_size' : 1e8
                              },
-                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_NoAdditive', 
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Non', 
                                                'pref' : 1.0
                                               }
                                     }
@@ -201,14 +201,14 @@ mix_non_stream10 = {'info' : {'mixing_ratio' : 0.9,
 mix_add_stream10 = {'info' : {'mixing_ratio' : 0.1,
                               'buf_size' : 1e8
                              },
-                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Additive',
+                    'commodities' : {'item' : {'commodity' : 'Mixer_UOX_Add',
                                                'pref' : 1.0
                                               }
                                     }
                    }
-mix_10pct232 = {'name' : 'Mixer10pctAdditive',
+mix_10pct232 = {'name' : 'Mixer10pctAdd',
                 'config' : {'Mixer' : {'in_streams' : {'stream' : [mix_non_stream10, mix_add_stream10]},
-                                       'out_commod' : 'UOX_10pctAdditive',
+                                       'out_commod' : 'UOX_10pctAdd',
                                        'throughput' : 1e10,
                                        'out_buf_size' : 1e20
                                       }
