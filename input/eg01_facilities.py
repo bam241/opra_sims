@@ -7,7 +7,7 @@ natu_source = {'name' : 'SourceNatU',
                           }
               }
 non_source = {'name' : 'SourceNonIsos',
-              'config' : {'Source' : {'outcommod' : 'NoAddIsos',
+              'config' : {'Source' : {'outcommod' : 'NonIsos',
                                       'outrecipe' : 'NoAdditive_234',
                                       'throughput' : 1e6
                                      }
