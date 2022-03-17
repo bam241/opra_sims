@@ -147,8 +147,8 @@ store_pct_no232 = {'name' : 'StorageRampNon',
                                             'in_recipe' : 'UOX_no232', 
                                             'out_commods' : {'val' : 'Mixer_UOX_Non'}, 
                                             'residence_time' : 0,
-                                            'throughput' : 1e10,
-                                            'max_inv_size' : 1e20
+                                            'throughput' : 1e9,
+                                            'max_inv_size' : 1e10
                                            }
                               }
                    }
@@ -157,8 +157,8 @@ store_pct_232 = {'name' : 'StorageRampAdd',
                                           'in_recipe' : 'UOX_232', 
                                           'out_commods' : {'val' : 'Mixer_UOX_Add'}, 
                                           'residence_time' : 0,
-                                          'throughput' : 1e10,
-                                          'max_inv_size' : 1e20
+                                          'throughput' : 1e9,
+                                          'max_inv_size' : 1e10
                                          }
                             }
                 }

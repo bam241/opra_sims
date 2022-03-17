@@ -26,6 +26,11 @@ The simulations are run from the notebook `inputs.ipynb`. The facilities and
 recipes are saved in files that describe their use. The input files are also
 saved as `[user_description].py` in this directory.
 
+The recipes contain some made up values to "track" important nuclides from
+other recycle studies.  This is documented via comments in the file
+`recipes_100ppt.py`.  These would need to be fixed before drawing any
+conclusions from fuel cycle transitions to recycling.
+
 ## output
 
 The simulation databases should all be housed here because the analysis
