@@ -8,7 +8,7 @@ eg23_sink = {'name' : 'Waste',
 
 # Post-LWR Facilities
 
-# Storage facilities can take many inputs but only give one output, so unlike in EG01 
+# Storage facilities can take many inputs but only give one output, so unlike in EG01
 # am now separating the spent fuel cooling and storage into separate streams
 non_lwr_cool = {'name' : 'UOXCoolNon',
                 'config' : {'Storage' : {'in_commods' : {'val' : 'SpentUOX_Non'},
@@ -26,24 +26,21 @@ add_lwr_cool = {'name' : 'UOXCoolAdd',
                                         }
                            }
                }
-lwr_sep_streams = {'item' : [{'commod' : 'UOX_Pu',
-                              'info' : {'buf_size' : 1e100,
-                                        'efficiencies' : {'item' : {'comp': 'Pu239', 
-                                                                    'eff': 0.99}}
-                                       }
-                             },
-                             {'commod' : 'UOX_RU',
-                              'info' : {'buf_size' : 1e100,
-                                        'efficiencies' : {'item' : {'comp': 'U238', 
-                                                                    'eff': 0.99}}
-                                       }
-                             }
-                            ]
-                  }
+lwr_sep_streams = {
+    'item': [
+        {
+            'commod': 'UOX_Pu', 'info': {
+                'buf_size': 1e100, 'efficiencies': {
+                    'item': {
+                        'comp': 'Pu239', 'eff': 0.99}}}}, {
+                            'commod': 'UOX_RU', 'info': {
+                                'buf_size': 1e100, 'efficiencies': {
+                                    'item': {
+                                        'comp': 'U238', 'eff': 0.99}}}}]}
 lwr_sep = {'name' : 'UOXSep',
            'config' : {'Separations' : {'leftover_commod' : 'Waste',
-                                        'throughput' : 83333.3333,
-                                        'feedbuf_size' : 107537,
+                                        'throughput': 10e15,
+                                        'feedbuf_size': 10e16,
                                         # can't use feed recipe unless we split into 2 sep facilities for each commod
                                         'feed_commods' : {'val' : ['CooledSpentUOX_Non', 'CooledSpentUOX_Add']},
                                         'feed_commod_prefs' : {'val' : [1, 2]},
@@ -54,7 +51,7 @@ lwr_sep = {'name' : 'UOXSep',
 
 # SFR Additions
 
-mix_pu = {'info' : {'mixing_ratio' : 0.0900, 
+mix_pu = {'info': {'mixing_ratio': 0.0900,
                     'buf_size' : 1e8},
           'commodities' : {'item' : [{'commodity' : 'UOX_Pu',
                                       'pref' : 1},
@@ -65,7 +62,7 @@ mix_pu = {'info' : {'mixing_ratio' : 0.0900,
          }
 mix_ru = {'info' : {'mixing_ratio' : 0.7100,
                     'buf_size' : 1e8
-                   }, 
+                    },
           'commodities' : {'item' : [{'commodity' : 'UOX_RU',
                                       'pref' : 1},
                                      {'commodity' : 'FF_RU',
@@ -75,7 +72,7 @@ mix_ru = {'info' : {'mixing_ratio' : 0.7100,
          }
 mix_natu = {'info' : {'mixing_ratio' : 0.1995,
                       'buf_size' : 1e8
-                     }, 
+                      },
             'commodities' : {'item' : [{'commodity' : 'StoredDepU',
                                         'pref' : 2},
                                        {'commodity' : 'NatU',
@@ -85,14 +82,14 @@ mix_natu = {'info' : {'mixing_ratio' : 0.1995,
            }
 mix_non_iso = {'info' : {'mixing_ratio' : 0.0005,
                          'buf_size' : 1e8
-                        }, 
+                         },
                'commodities' : {'item' : {'commodity' : 'NonIsos',
                                            'pref' : 1}
                                }
               }
 mix_add_iso = {'info' : {'mixing_ratio' : 0.0005,
                          'buf_size' : 1e8
-                        }, 
+                         },
                'commodities' : {'item' : {'commodity' : 'AddIsos',
                                            'pref' : 1}
                                }
@@ -129,25 +126,22 @@ add_sfr_cool = {'name' : 'FFCoolAdd',
                                         }
                            }
                }
-sfr_sep_streams = {'item' : [{'commod' : 'FF_Pu',
-                              'info' : {'buf_size' : 1e100,
-                                        'efficiencies' : {'item' : {'comp': 'Pu239', 
-                                                                    'eff': 0.99}}
-                                       }
-                             },
-                             {'commod' : 'FF_RU',
-                              'info' : {'buf_size' : 1e100,
-                                        'efficiencies' : {'item' : {'comp': 'U238', 
-                                                                    'eff': 0.99}}
-                                       }
-                             }
-                            ]
-                  }
+sfr_sep_streams = {
+    'item': [
+        {
+            'commod': 'FF_Pu', 'info': {
+                'buf_size': 1e100, 'efficiencies': {
+                    'item': {
+                        'comp': 'Pu239', 'eff': 0.99}}}}, {
+                            'commod': 'FF_RU', 'info': {
+                                'buf_size': 1e100, 'efficiencies': {
+                                    'item': {
+                                        'comp': 'U238', 'eff': 0.99}}}}]}
 #other studies changed SepSFR values to 1e100
 sfr_sep = {'name' : 'FFSep',
            'config' : {'Separations' : {'leftover_commod' : 'Waste',
-                                        'throughput' : 83333.3333, 
-                                        'feedbuf_size' : 107537,
+                                        'throughput': 1e10,
+                                        'feedbuf_size': 1e6,
                                         # can't use feed recipe unless we split into 2 sep facilities for each commod
                                         'feed_commods' : {'val' : ['CooledSpentFF_Non', 'CooledSpentFF_Add']},
                                         'feed_commod_prefs' : {'val' : [1, 2]},
