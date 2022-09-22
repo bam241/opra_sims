@@ -133,7 +133,7 @@ lwr_cool = {
                     'SpentUOX_Add', 'SpentUOX_Non']}, 'out_commods': {
                         'val': 'CooledSpentUOX'}, 'residence_time': 81}}}
 lwr_store = {'name': 'UOXStr',
-             'config': {'Storage': {'in_commods': {'val': 'CooledSpentUOX'},
+             'config': {'Storage': {'in_commods': {'val': 'c_S_UOX_cool'},
                                     'out_commods': {'val': 'StoredSpentUOX'},
                                     'residence_time': 0
                                     }
