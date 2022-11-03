@@ -1,6 +1,6 @@
 ._*
 .ipynb_checkpoints/
-*.sqlite
+#*.sqlite
 *.tar.gz
 *.sw*
 */__pycache__/
