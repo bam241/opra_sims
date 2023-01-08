@@ -39,8 +39,8 @@ lwr_sep_streams = {
                                         'comp': 'U238', 'eff': 0.99}}}}]}
 lwr_sep = {'name' : 'UOXSep',
            'config' : {'Separations' : {'leftover_commod' : 'Waste',
-                                        'throughput': 10e15,
-                                        'feedbuf_size': 10e16,
+                                        'throughput': 1e7,
+                                        'feedbuf_size': 1e8,
                                         # can't use feed recipe unless we split into 2 sep facilities for each commod
                                         'feed_commods' : {'val' : ['CooledSpentUOX_Non', 'CooledSpentUOX_Add']},
                                         'feed_commod_prefs' : {'val' : [1, 2]},
@@ -140,8 +140,8 @@ sfr_sep_streams = {
 #other studies changed SepSFR values to 1e100
 sfr_sep = {'name' : 'FFSep',
            'config' : {'Separations' : {'leftover_commod' : 'Waste',
-                                        'throughput': 1e10,
-                                        'feedbuf_size': 1e6,
+                                        'throughput': 1e7,
+                                        'feedbuf_size': 1e7,
                                         # can't use feed recipe unless we split into 2 sep facilities for each commod
                                         'feed_commods' : {'val' : ['CooledSpentFF_Non', 'CooledSpentFF_Add']},
                                         'feed_commod_prefs' : {'val' : [1, 2]},
